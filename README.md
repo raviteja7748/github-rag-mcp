@@ -1,17 +1,195 @@
 # 🚀 GitHub RAG MCP Server
 
-**Transform any GitHub repository into a powerful RAG (Retrieval-Augmented Generation) system with intelligent caching and real-time progress tracking.**
+**Transform any GitHub repository into a powerful, searchable knowledge base with intelligent caching and real-time progress tracking.**
 
-[![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-API-green.svg)](https://platform.openai.com/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-orange.svg)](https://supabase.com/)
-[![MCP](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io/)
+## 📋 Project Summary
 
-## 🎯 What This Does
+This MCP (Model Context Protocol) server converts GitHub repositories into structured RAG (Retrieval-Augmented Generation) systems that AI assistants can query intelligently. Unlike simple file access, this tool processes repositories into semantic chunks with AI-generated summaries and vector embeddings, enabling deep code understanding and efficient search capabilities.
 
-This MCP (Model Context Protocol) server **directly clones GitHub repositories** and transforms them into structured RAG systems that can be queried by AI assistants. Perfect for code analysis, documentation search, and understanding large codebases.
+**Key capabilities:**
+- 🔄 **Direct repository processing**: Clone, analyze, and transform any GitHub repo
+- 🧠 **AI-powered understanding**: GPT-4 summaries for every code chunk  
+- 🔍 **Semantic search**: Find code by meaning, not just keywords
+- 💾 **Smart caching**: 90% faster subsequent runs with intelligent cache system
+- 📊 **Real-time progress**: Live updates during processing
 
-### ✨ Key Features
+## 🆚 GitHub MCP Comparison
+
+| Feature | Official GitHub MCP | This GitHub RAG MCP |
+|---------|-------------------|-------------------|
+| **Data Access** | Raw file content via GitHub API | Processed, chunked, and summarized content |
+| **Search** | File path and name searching | Semantic search with AI embeddings |
+| **Understanding** | Basic file reading | AI-generated summaries for each code chunk |
+| **Performance** | API rate limited | Cached processing with 90% speed improvement |
+| **Offline Access** | Requires GitHub API | Local database with offline search |
+| **Use Case** | Quick file access | Deep code analysis and understanding |
+
+**When to use this over official GitHub MCP:**
+- ✅ Analyzing large, complex codebases
+- ✅ Finding code by functionality, not just file names  
+- ✅ Getting AI-powered insights into repository structure
+- ✅ Working with repositories repeatedly (caching benefits)
+- ✅ Semantic code search and discovery
+
+## 🛠️ Installation
+
+### Prerequisites
+
+- **Python 3.12+** 
+- **OpenAI API key** (for embeddings and summaries)
+- **Supabase account** (free tier works)
+
+### Method 1: Using uv (Recommended)
+
+[uv](https://docs.astral.sh/uv/) is the fastest Python package manager (10-100x faster than pip) and provides better dependency resolution.
+
+#### **Step 1: Install uv** 
+
+**Don't have uv yet? Choose the best method for your system:**
+
+**🚀 Option A: Standalone Installer (Recommended - No Python required)**
+```bash
+# Linux/Mac
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+**🐍 Option B: Using pip (if you already have Python)**
+```bash
+pip install uv
+```
+
+**📦 Option C: Using pipx (if you have pipx)**
+```bash
+pipx install uv
+```
+
+**🍺 Option D: Package Managers**
+```bash
+# macOS (Homebrew)
+brew install uv
+
+# Windows (Scoop)
+scoop install uv
+
+# Windows (Chocolatey)
+choco install uv
+```
+
+#### **Step 2: Setup Project**
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/raviteja7748/github-rag-mcp.git
+cd github-rag-mcp
+
+# 2. Install dependencies (uv automatically creates virtual environment)
+uv sync
+
+# 3. Activate the environment (optional - uv run works without activation)
+source .venv/bin/activate  # Linux/Mac
+# or
+.venv\Scripts\activate     # Windows
+```
+
+### Method 2: Using pip
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/raviteja7748/github-rag-mcp.git
+cd github-rag-mcp
+
+# 2. Create virtual environment
+python -m venv .venv
+
+# 3. Activate virtual environment
+source .venv/bin/activate  # Linux/Mac
+# or
+.venv\Scripts\activate     # Windows
+
+# 4. Install dependencies
+pip install -r requirements.txt
+```
+
+### Database Setup
+
+1. **Create Supabase Project**
+   - Go to [supabase.com](https://supabase.com) and create a new project
+   - Wait for the project to be ready (usually 1-2 minutes)
+
+2. **Run Database Schema**
+   - Open the SQL Editor in your Supabase dashboard
+   - Copy and paste the contents of `sql/github_rag_schema.sql`
+   - Execute the SQL to create the required tables and functions
+
+3. **Get Credentials**
+   - Go to Settings → API in your Supabase dashboard
+   - Copy your Project URL and service_role API key
+
+### Environment Configuration
+
+Create a `.env` file in the project root:
+
+```env
+# OpenAI Configuration
+OPENAI_API_KEY=your_openai_api_key_here
+SUMMARY_MODEL=gpt-4o-mini
+EMBEDDING_MODEL=text-embedding-3-small
+
+# Supabase Configuration  
+SUPABASE_URL=your_supabase_project_url_here
+SUPABASE_SERVICE_KEY=your_supabase_service_key_here
+
+# Performance Features (Optional)
+CACHE_ENABLED=true
+USE_CONTEXTUAL_EMBEDDINGS=true
+USE_HYBRID_SEARCH=true
+USE_RERANKING=true
+```
+
+### Start the Server
+
+```bash
+# Using uv
+uv run python src/github_rag_mcp.py
+
+# Using pip (with activated environment)
+python src/github_rag_mcp.py
+```
+
+The server will start on `http://localhost:8052`
+
+### Configure Your AI Assistant
+
+#### For Cursor IDE:
+Add to your MCP settings (`.cursor/mcp.json`):
+```json
+{
+  "mcpServers": {
+    "github-rag": {
+      "transport": "sse",
+      "url": "http://localhost:8052/sse"
+    }
+  }
+}
+```
+
+#### For Claude Desktop:
+Add to your Claude configuration:
+```json
+{
+  "mcpServers": {
+    "github-rag": {
+      "command": "python",
+      "args": ["path/to/github-rag-mcp/src/github_rag_mcp.py"]
+    }
+  }
+}
+```
+
+## ✨ Key Features
 
 - 🔄 **Direct GitHub Integration**: Clone and process any public repository
 - 🧠 **AI-Powered Analysis**: GPT-4 summaries for every code chunk
@@ -35,65 +213,6 @@ This MCP (Model Context Protocol) server **directly clones GitHub repositories**
 - **Medium repos** (100-1000 files): ~2-5 minutes  
 - **Large repos** (1000+ files): ~10-30 minutes
 - **Cache-enabled reruns**: ~80% faster
-
-## 🚀 Quick Start
-
-### 1. **Clone & Install**
-
-   ```bash
-git clone https://github.com/your-username/github-rag-mcp.git
-cd github-rag-mcp
-pip install -r requirements.txt
-```
-
-### 2. **Database Setup**
-
-1. Create a [Supabase](https://supabase.com) project
-2. Run the SQL schema from `sql/github_rag_schema.sql`
-
-### 3. **Configuration**
-
-Create a `.env` file:
-
-```env
-# OpenAI Configuration
-OPENAI_API_KEY=your_openai_api_key_here
-SUMMARY_MODEL=gpt-4o-mini
-EMBEDDING_MODEL=text-embedding-3-small
-
-# Supabase Configuration  
-SUPABASE_URL=your_supabase_project_url_here
-SUPABASE_SERVICE_KEY=your_supabase_service_key_here
-
-# Performance Features
-CACHE_ENABLED=true
-USE_CONTEXTUAL_EMBEDDINGS=true
-USE_HYBRID_SEARCH=true
-USE_RERANKING=true
-```
-
-### 4. **Start the Server**
-
-```bash
-python src/github_rag_mcp.py
-```
-
-Server runs on `http://localhost:8052`
-
-### 5. **Configure Your AI Assistant**
-
-#### For Cursor IDE:
-Add to your MCP settings:
-```json
-{
-  "mcpServers": {
-    "github-rag": {
-      "transport": "sse",
-      "url": "http://localhost:8052/sse"
-    }
-  }
-}
-```
 
 ## 🎬 Live Processing Example
 
