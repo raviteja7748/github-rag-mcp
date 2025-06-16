@@ -68,7 +68,9 @@ cp .env.example .env
 
 1. Create a [Supabase](https://supabase.com) project
 2. Run the SQL schema from `sql/github_rag_schema.sql`
-
+```
+```
+```
 ### 3. **Configuration**
 
 Create a `.env` file:
@@ -93,7 +95,7 @@ USE_RERANKING=true
 ### 4. **Start the Server**
 
 ```bash
-python src/github_rag_mcp.py
+uv run src/github_rag_mcp.py
 ```
 
 Server runs on `http://localhost:8052`
