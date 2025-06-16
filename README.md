@@ -40,13 +40,29 @@ This MCP (Model Context Protocol) server **directly clones GitHub repositories**
 
 ### 1. **Clone & Install**
 
+**Option A: UV (Recommended) - Modern Python package management**
 ```bash
 git clone https://github.com/raviteja7748/github-rag-mcp.git
 cd github-rag-mcp
-pip install -r requirements.txt
-uv sync
+uv sync  # Creates virtual env + installs all dependencies
 ```
 
+**Option B: Traditional pip**
+```bash
+git clone https://github.com/raviteja7748/github-rag-mcp.git
+cd github-rag-mcp
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 2. **Environment Setup**
+```bash
+# Copy environment template
+cp .env.example .env
+# Edit .env with your API keys (see Configuration section below)
+```
+```
 
 ### 2. **Database Setup**
 
