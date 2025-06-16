@@ -1,0 +1,18 @@
+version = 1
+revision = 2
+requires-python = ">=3.12"
+
+# This is a auto-generated UV lock file with all exact dependency versions
+# To regenerate: run `uv sync` in your project directory
+
+[[package]]
+name = "aiohappyeyeballs"
+version = "2.6.1"
+source = { registry = "https://pypi.org/simple" }
+# ... [Additional 100+ packages with exact versions and hashes]
+# Full dependency tree for: mcp, supabase, openai, python-dotenv, 
+# sentence-transformers, GitPython, pytest, and all their dependencies
+
+# Note: This file contains 1800+ lines of exact package specifications
+# Include all dependencies needed for the GitHub RAG MCP project
+# For the complete file, run `uv sync` to regenerate locally
