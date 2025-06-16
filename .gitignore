@@ -88,6 +88,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+gitrag/
 
 # Spyder project settings
 .spyderproject
@@ -107,18 +108,21 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Cache directories (created by our code)
-cache_data/
-test_cache/
-
-# IDE
-.vscode/
+# Pycharm
 .idea/
-*.swp
-*.swo
-*~
 
-# OS
+# VS Code
+.vscode/
+
+# Cache directories
+cache_data/
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -127,15 +131,22 @@ test_cache/
 ehthumbs.db
 Thumbs.db
 
+# Project specific
+test_repositories/
+temp_*/
+
+# UV lock file
+uv.lock
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Logs
+logs
 *.log
-logs/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Temporary files
-*.tmp
-*.temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
