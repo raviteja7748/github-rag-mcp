@@ -40,37 +40,17 @@ This MCP (Model Context Protocol) server **directly clones GitHub repositories**
 
 ### 1. **Clone & Install**
 
-**Option A: UV (Recommended) - Modern Python package management**
-```bash
-git clone https://github.com/raviteja7748/github-rag-mcp.git
+   ```bash
+git clone https://github.com/your-username/github-rag-mcp.git
 cd github-rag-mcp
-uv sync  # Creates virtual env + installs all dependencies
-```
-
-**Option B: Traditional pip**
-```bash
-git clone https://github.com/raviteja7748/github-rag-mcp.git
-cd github-rag-mcp
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-### 2. **Environment Setup**
-```bash
-# Copy environment template
-cp .env.example .env
-# Edit .env with your API keys (see Configuration section below)
-```
 ```
 
 ### 2. **Database Setup**
 
 1. Create a [Supabase](https://supabase.com) project
 2. Run the SQL schema from `sql/github_rag_schema.sql`
-```
-```
-```
+
 ### 3. **Configuration**
 
 Create a `.env` file:
@@ -95,7 +75,7 @@ USE_RERANKING=true
 ### 4. **Start the Server**
 
 ```bash
-uv run src/github_rag_mcp.py
+python src/github_rag_mcp.py
 ```
 
 Server runs on `http://localhost:8052`
@@ -246,4 +226,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Ready to transform any GitHub repository into a powerful, searchable knowledge base? Get started now!** 🚀
+**Ready to transform any GitHub repository into a powerful, searchable knowledge base? Get started now!** 🚀 
