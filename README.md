@@ -44,7 +44,9 @@ This MCP (Model Context Protocol) server **directly clones GitHub repositories**
 git clone https://github.com/raviteja7748/github-rag-mcp.git
 cd github-rag-mcp
 pip install -r requirements.txt
+uv sync
 ```
+
 
 ### 2. **Database Setup**
 
