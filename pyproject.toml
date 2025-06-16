@@ -1,0 +1,40 @@
+[project]
+name = "github-rag-mcp"
+version = "0.1.0"
+description = "MCP server for converting GitHub repositories to structured RAG systems"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp==1.7.1",
+    "supabase==2.15.1",
+    "openai==1.71.0",
+    "python-dotenv==1.0.1",
+    "sentence-transformers>=4.1.0",
+    "GitPython==3.1.43",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
